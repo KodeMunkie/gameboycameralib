@@ -10,7 +10,7 @@ However, if you want to try it...
 ### Choose a palette
 In the "uk.co.silentsoftware.codec.IndexPalette" class decide which constant palette you want to
 use to decode/encode images or define your own indexed array and use it with this class.
-Inject the IndexedPalette into the constructor for the decoder or encoder classes described below
+Inject the IndexedPalette into the constructor for the decoder or encoder classes described below.
 
 ### To decode
 If you have a Gameboy Camera save dump call any of the public "extract" methods in:
@@ -27,9 +27,9 @@ The source BufferedImage data will be dithered and converted to the correct dime
 and palette automatically. If you want to customise this then consider using the
 "encodeNoPreprocessing" method, but you will need the image to have the palette defined
 and in use in IndexedPalette, with the width/height of the Gameboy image format 
-(160x144 or 128x112) 
+(160x144 or 128x112).
 
 ### Still to do
 Method comments and javadoc, tests and error handling (code has all been tested manually so YMMV). 
-Facades, builder pattern constrcution, dither configuration options, and command line interface 
+Facades, builder pattern construction, dither configuration options, and command line interface 
 code will be added later.
