@@ -16,6 +16,7 @@
  */
 package uk.co.silentsoftware.codec.extractor;
 
+import static uk.co.silentsoftware.codec.constants.SaveImageConstants.*;
 import org.apache.commons.io.IOUtils;
 import uk.co.silentsoftware.codec.Extractor;
 import uk.co.silentsoftware.codec.IndexedPalette;
@@ -33,10 +34,6 @@ import java.util.stream.Collectors;
 
 public class SaveImageExtractor implements Extractor {
 
-    private static final int IMAGE_WIDTH = 128;
-    private static final int IMAGE_HEIGHT = 112;
-    private static final int IMAGE_START_LOCATION = 0x2000;
-    private static final int IMAGE_LENGTH = 0x1000;
     private static final String PNG_FORMAT = "png";
     private final ImageCodec imageCodec;
 

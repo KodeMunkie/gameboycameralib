@@ -21,10 +21,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-/*
- * Helper interface for extracting raw 2bpp image(s) data from different source mediums, e.g
- * Gameboy save file or Gameboy printer dump, and returns the decoded images in the specified
- * format
+/**
+ * Interface for extracting raw 2bpp image(s) data from different source mediums, e.g
+ * Gameboy save file or Gameboy printer dump, and returns the decoded images in the method
+ * specified format.
  */
 public interface Extractor {
 
