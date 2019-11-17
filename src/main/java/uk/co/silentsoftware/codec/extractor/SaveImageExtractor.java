@@ -19,7 +19,7 @@ package uk.co.silentsoftware.codec.extractor;
 import static uk.co.silentsoftware.codec.constants.SaveImageConstants.*;
 import org.apache.commons.io.IOUtils;
 import uk.co.silentsoftware.codec.Extractor;
-import uk.co.silentsoftware.codec.IndexedPalette;
+import uk.co.silentsoftware.codec.constants.IndexedPalette;
 import uk.co.silentsoftware.codec.image.ImageCodec;
 
 import javax.imageio.ImageIO;

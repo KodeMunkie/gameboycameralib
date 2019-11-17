@@ -17,7 +17,7 @@
 package uk.co.silentsoftware.codec.injector;
 
 import org.apache.commons.io.IOUtils;
-import uk.co.silentsoftware.codec.IndexedPalette;
+import uk.co.silentsoftware.codec.constants.IndexedPalette;
 import uk.co.silentsoftware.codec.Injector;
 import uk.co.silentsoftware.codec.image.ImageCodec;
 

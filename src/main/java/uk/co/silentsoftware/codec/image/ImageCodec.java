@@ -17,7 +17,7 @@
 package uk.co.silentsoftware.codec.image;
 
 import uk.co.silentsoftware.codec.Codec;
-import uk.co.silentsoftware.codec.IndexedPalette;
+import uk.co.silentsoftware.codec.constants.IndexedPalette;
 import uk.co.silentsoftware.codec.tile.TileCodec;
 import uk.co.silentsoftware.dither.ErrorDiffusionConverter;
 import uk.co.silentsoftware.util.ImageUtils;
