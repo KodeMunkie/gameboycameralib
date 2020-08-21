@@ -19,7 +19,11 @@ Add the following to your Maven project pom.xml:
     ...
     <repository>
         <id>gameboy-camera-lib</id>
-        <url>https://maven.pkg.github.com/kodemunkie/gameboycameralib/mvn-repo/</url>
+        <url>https://raw.github.com/kodemunkie/gameboycameralib/mvn-repo/</url>
+        <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+        </snapshots>
     </repository>
 </repositories>
 ```
