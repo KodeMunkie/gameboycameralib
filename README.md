@@ -4,7 +4,10 @@ A library capable of encoding and decoding Gameboy Camera 2BPP images as PNGs or
 ## Usage
 This project is still pre-release, however since it's now in use a Maven SNAPSHOT (unstable) artifact is available.
 
-Add the following to your Maven project pom.xml to use:
+**Sadly because of [this GitHub issue](https://github.community/t/download-from-github-package-registry-without-authentication/14407/59)
+you will need to specify your GitHub personal access token in your .m2/settings.xml in order to use it.**
+
+Add the following to your Maven project pom.xml:
 ```xml
 <dependency>
     <groupId>uk.co.silentsoftware</groupId>
