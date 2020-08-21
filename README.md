@@ -2,11 +2,24 @@
 A library capable of encoding and decoding Gameboy Camera 2BPP images as PNGs or BufferedImages.
 
 ## Usage
-In short, there is no maven build or artifact yet as this is still pre-release - this means 
-the API is still likely to change.
+This project is still pre-release, however since it's now in use a Maven SNAPSHOT (unstable) artifact is available.
 
-However, if you want to try it...
+Add the following to your Maven project pom.xml to use:
+```xml
+<dependency>
+    <groupId>uk.co.silentsoftware</groupId>
+    <artifactId>gameboy-camera-lib</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</dependency>
 
+<repositories>
+    ...
+    <repository>
+        <id>gameboy-camera-lib</id>
+        <url>https://raw.github.com/kodemunkie/gameboycameralib/mvn-repo/</url>
+    </repository>
+</repositories>
+```
 ### Choose a palette
 Gameboy images contain no RGB palette information, only 4 shades. The representation of these shades
 on a true colour display requires you to make a choice as to what RGB values they represent, usually greens 
