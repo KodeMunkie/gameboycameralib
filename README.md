@@ -76,7 +76,7 @@ specified dimensions to be compatible with Gameboy hardware. If you want to cust
 "encodeNoPreprocessing" method, but you will need the image to have the RGB values defined
 and in use in IndexedPalette, with the width/height of the Gameboy image format 
 (160x144 for printer saves or 128x112 for camera dumps).
-Equivalent to SaveImageExtractor there is also a SaveImageInjector class which can put overwrite images in an existing
+Equivalent to SaveImageExtractor there is also a SaveImageInjector class which can overwrite images in an existing
 save file, however it currently lacks the ability to create a Gameboy save file from scratch so I'm not recommending
 you use that yet.
 
