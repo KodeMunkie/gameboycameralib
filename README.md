@@ -71,9 +71,9 @@ Codec codec = new ImageCodec(new IndexedPalette(IndexedPalette.GAMEBOY_LCD_PALET
 byte[] myRaw2BppImageDataArray = codec.encode(myBufferedImageData);
 ```
 
-The source BufferedImage data assumed using the the Indexed palette RGB values, will be dithered and converted to the 
-specified dimensions to be compatible with Gameboy hardware. If you want to customise this then consider using the
-"encodeNoPreprocessing" method, but you will need the image to have the RGB values defined
+The source BufferedImage data, which is assumed to be using the Indexed palette RGB values, will be dithered and 
+converted to the specified dimensions compatible with Gameboy hardware. If you want to customise this then consider 
+using the "encodeNoPreprocessing" method, but you will need the image to have the RGB values defined
 and in use in IndexedPalette, with the width/height of the Gameboy image format 
 (160x144 for printer saves or 128x112 for camera dumps).
 Equivalent to SaveImageExtractor there is also a SaveImageInjector class which can overwrite images in an existing
