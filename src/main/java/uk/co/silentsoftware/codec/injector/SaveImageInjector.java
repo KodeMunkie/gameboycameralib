@@ -48,7 +48,7 @@ public class SaveImageInjector implements Injector {
         byte[] result = sourceSave.clone();
         for (int i=0, payloadSize=payload.size(); i<MAX_SUPPORTED_IMAGES && i<payloadSize; ++i) {
             byte[] encodedImage = imageCodec.encode(payload.get(i));
-            System.arraycopy(encodedImage,0,result,IMAGE_START_LOCATION+(i*IMAGE_LENGTH),encodedImage.length);
+            System.arraycopy(encodedImage,0,result,IMAGE_START_LOCATION+(i*NEXT_IMAGE_START_OFFSET),encodedImage.length);
         }
         return result;
     }
