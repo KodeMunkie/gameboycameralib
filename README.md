@@ -81,10 +81,9 @@ save file, however it currently lacks the ability to create a Gameboy save file 
 you use that yet.
 
 ### Still to do
-PrinterImageExtractor (ImageCodec class' decode methods already work for single printer images, but direct extraction 
-from a print stream/dump is not yet possible. 
-Improve SaveImageInjector to create images too and add a PrinterImageInjector implementation. 
+Implement PrinterImageExtractor - ImageCodec class' decode methods already work for single printer images. 
+Implement PrinterImageInjector. 
+Improve SaveImageInjector to create Gameboy save files rather than replacing images in an existing save.
 
 Also still to change - method comments and javadoc, tests and error handling (code has all been tested manually so YMMV). 
-Facades, builder pattern construction, dither configuration options, and command line interface 
-code.
+Dither configuration options and command line interface code.
