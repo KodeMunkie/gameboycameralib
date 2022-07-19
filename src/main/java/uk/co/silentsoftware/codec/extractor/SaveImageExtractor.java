@@ -39,8 +39,8 @@ public class SaveImageExtractor implements Extractor {
     private final ImageCodec imageCodec;
     private final ImageCodec smallImageCodec;
     public SaveImageExtractor(IndexedPalette palette) {
-        imageCodec = new ImageCodec(palette, IMAGE_WIDTH, IMAGE_HEIGHT);
-        smallImageCodec = new ImageCodec(palette, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
+        this.imageCodec = new ImageCodec(palette, IMAGE_WIDTH, IMAGE_HEIGHT);
+        this.smallImageCodec = new ImageCodec(palette, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
     }
 
     @Override
@@ -55,17 +55,17 @@ public class SaveImageExtractor implements Extractor {
             for (int i = IMAGE_START_LOCATION; i < rawData.length; i += NEXT_IMAGE_START_OFFSET) {
 
                 // The full size images
-                byte[] b = new byte[IMAGE_LENGTH];
-                System.arraycopy(rawData, i, b, 0, IMAGE_LENGTH);
-                if (!isEmptyImage(b)) {
-                    images.add(imageCodec.decode(b));
+                byte[] image = new byte[IMAGE_LENGTH];
+                System.arraycopy(rawData, i, image, 0, IMAGE_LENGTH);
+                if (isEmptyImage(image)) {
+                    continue;
                 }
+                images.add(imageCodec.decode(image));
+
                 // The thumbs
-                byte[] s = new byte[SMALL_IMAGE_LENGTH];
-                System.arraycopy(rawData, i+SMALL_IMAGE_START_OFFSET, s, 0, SMALL_IMAGE_LENGTH);
-                if (!isEmptyImage(s)) {
-                    images.add(smallImageCodec.decode(s));
-                }
+                byte[] thumbImage = new byte[SMALL_IMAGE_LENGTH];
+                System.arraycopy(rawData, i+SMALL_IMAGE_START_OFFSET, thumbImage, 0, SMALL_IMAGE_LENGTH);
+                images.add(smallImageCodec.decode(thumbImage));
             }
         } catch (Exception e) {
             // Just print the error and continue to return what images we have
