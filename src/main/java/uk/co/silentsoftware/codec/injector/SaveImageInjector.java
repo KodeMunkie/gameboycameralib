@@ -26,6 +26,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,17 +39,27 @@ import static uk.co.silentsoftware.codec.constants.SaveImageConstants.*;
 public class SaveImageInjector implements Injector {
 
     private final ImageCodec imageCodec;
+    private final ImageCodec smallImageCodec;
 
     public SaveImageInjector() {
-        this.imageCodec = new ImageCodec(new IndexedPalette(IndexedPalette.EVEN_DIST_PALETTE), IMAGE_WIDTH, IMAGE_HEIGHT);;
+        IndexedPalette indexedPalette = new IndexedPalette(IndexedPalette.EVEN_DIST_PALETTE);
+        this.imageCodec = new ImageCodec(indexedPalette, IMAGE_WIDTH, IMAGE_HEIGHT);
+        this.smallImageCodec = new ImageCodec(indexedPalette, SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT);
     }
 
     @Override
     public byte[] inject(byte[] sourceSave, List<BufferedImage> payload) {
         byte[] result = sourceSave.clone();
-        for (int i=0, payloadSize=payload.size(); i<MAX_SUPPORTED_IMAGES && i<payloadSize; ++i) {
-            byte[] encodedImage = imageCodec.encode(payload.get(i));
-            System.arraycopy(encodedImage,0,result,IMAGE_START_LOCATION+(i*NEXT_IMAGE_START_OFFSET),encodedImage.length);
+        for (int i=0; i<MAX_SUPPORTED_IMAGES && i<payload.size(); ++i) {
+            BufferedImage payloadImage = payload.get(i);
+            int imageOffset = IMAGE_START_LOCATION+(i*NEXT_IMAGE_START_OFFSET);
+            int smallImageOffset = imageOffset+SMALL_IMAGE_START_OFFSET;
+            int activeFlagOffset = imageOffset+SMALL_IMAGE_START_OFFSET+SMALL_IMAGE_LENGTH;
+            byte[] thumbImage = smallImageCodec.encode(payloadImage);
+            byte[] image = imageCodec.encode(payloadImage);
+            System.arraycopy(image,0,result, imageOffset ,image.length);
+            System.arraycopy(thumbImage, 0, result, smallImageOffset, SMALL_IMAGE_LENGTH);
+            result[activeFlagOffset] = (byte)0x10010101;
         }
         return result;
     }
@@ -56,11 +67,11 @@ public class SaveImageInjector implements Injector {
     @Override
     public byte[] inject(File sourceSave, List<File> imageFiles) throws IOException {
         byte[] source = IOUtils.toByteArray(new FileInputStream(sourceSave));
-        // TODO: Actual error handling!
         List<BufferedImage> images = imageFiles.stream().map(x-> {
             try {
                 return ImageIO.read(new FileInputStream(x));
             } catch (IOException e) {
+                // Just print the error and continue to inject what images we have
                 e.printStackTrace();
             }
             return null;
