@@ -17,7 +17,7 @@
 package uk.co.silentsoftware.codec.constants;
 
 
-public class SaveImageConstants {
+public final class SaveImageConstants {
 
     public static final int IMAGE_WIDTH = 128;
     public static final int IMAGE_HEIGHT = 112;
@@ -29,7 +29,6 @@ public class SaveImageConstants {
     public static final int SMALL_IMAGE_LENGTH = 0x100;
     public static final int IMAGE_LENGTH = 0xE00;
     public static final int MAX_SUPPORTED_IMAGES = 30;
-    public static final byte IMAGE_ACTIVE = (byte)0x00000000;
 
     private SaveImageConstants(){}
 }
