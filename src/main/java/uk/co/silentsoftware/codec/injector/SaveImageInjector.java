@@ -16,9 +16,8 @@
  */
 package uk.co.silentsoftware.codec.injector;
 
-import org.apache.commons.io.IOUtils;
-import uk.co.silentsoftware.codec.constants.IndexedPalette;
 import uk.co.silentsoftware.codec.Injector;
+import uk.co.silentsoftware.codec.constants.IndexedPalette;
 import uk.co.silentsoftware.codec.image.ImageCodec;
 
 import javax.imageio.ImageIO;
@@ -26,7 +25,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,7 +65,7 @@ public class SaveImageInjector implements Injector {
 
     @Override
     public byte[] inject(File sourceSave, List<File> imageFiles) throws IOException {
-        byte[] source = IOUtils.toByteArray(new FileInputStream(sourceSave));
+        byte[] source = Files.readAllBytes(sourceSave.toPath());
         List<BufferedImage> images = imageFiles.stream().map(x-> {
             try {
                 return ImageIO.read(new FileInputStream(x));

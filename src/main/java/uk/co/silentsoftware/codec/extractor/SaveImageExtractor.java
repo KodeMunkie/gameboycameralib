@@ -16,7 +16,6 @@
  */
 package uk.co.silentsoftware.codec.extractor;
 
-import org.apache.commons.io.IOUtils;
 import uk.co.silentsoftware.codec.Extractor;
 import uk.co.silentsoftware.codec.constants.IndexedPalette;
 import uk.co.silentsoftware.codec.image.ImageCodec;
@@ -45,7 +44,7 @@ public class SaveImageExtractor implements Extractor {
 
     @Override
     public List<BufferedImage> extract(File file) throws IOException {
-        return extract(IOUtils.toByteArray(Files.newInputStream(file.toPath())));
+        return extract(Files.readAllBytes(file.toPath()));
     }
 
     @Override

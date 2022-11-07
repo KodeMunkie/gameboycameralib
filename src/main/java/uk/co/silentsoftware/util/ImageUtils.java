@@ -16,6 +16,8 @@
  */
 package uk.co.silentsoftware.util;
 
+import uk.co.silentsoftware.util.colourdistance.LuminanceColourDistance;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
@@ -24,6 +26,8 @@ import java.awt.image.ColorModel;
  * Provides non-Gameboy specific image processing utility methods
  */
 public class ImageUtils {
+
+    private static final ColourDistanceStrategy colourDistanceStrategy = new LuminanceColourDistance();
 
     public static BufferedImage resize(BufferedImage buf, int imageWidth, int imageHeight) {
         if (buf.getWidth() == imageWidth && buf.getHeight() == imageHeight) {
@@ -91,16 +95,12 @@ public class ImageUtils {
         Integer closest = null;
         for (int colour : palette) {
             final int[] colourSetComps = intToRgbComponents(colour);
-            double diff = getColourDistance(red, green, blue, colourSetComps);
+            double diff = colourDistanceStrategy.getColourDistance(red, green, blue, colourSetComps);
             if (diff < bestMatch) {
                 closest = colour;
                 bestMatch = diff;
             }
         }
         return closest;
-    }
-
-    private static double getColourDistance(int red, int green, int blue, int[] colourSetComps) {
-        return Math.pow(red - colourSetComps[0], 2d) + Math.pow(green - colourSetComps[1], 2d) + Math.pow(blue - colourSetComps[2], 2d);
     }
 }
