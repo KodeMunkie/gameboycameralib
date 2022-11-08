@@ -17,8 +17,8 @@
 package uk.co.silentsoftware.codec.injector;
 
 import org.apache.commons.io.IOUtils;
-import uk.co.silentsoftware.codec.constants.IndexedPalette;
 import uk.co.silentsoftware.codec.Injector;
+import uk.co.silentsoftware.codec.constants.IndexedPalette;
 import uk.co.silentsoftware.codec.image.ImageCodec;
 
 import javax.imageio.ImageIO;
@@ -26,7 +26,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
