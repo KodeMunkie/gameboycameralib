@@ -1,11 +1,13 @@
 # Gameboy Camera Lib
-A library capable of encoding, decoding, extracting and injecting Gameboy Camera 2BPP images as PNGs or BufferedImages into or from existing Gameboy Camera save files.
+
+## Overview
+A Java library capable of encoding, decoding, injecting and extracting Gameboy Camera 2BPP images as PNGs or BufferedImages into or from existing Gameboy Camera save files.
 
 ## Examples
 
-[Original photo](assets/pier.png) 
+![Original photo](assets/pier.png) 
 
-[Even distribution palette encoding](assets/even-dist-palette.png) [GB Dump palette encoding](assets/gb-dump-palette.png) [LCD palette encoding](assets/lcd-palette.png) [Custom palette encoding](assets/custom-palette.png)
+![Even distribution palette encoding](assets/even-dist-palette.png) ![GB Dump palette encoding](assets/gb-dump-palette.png) ![LCD palette encoding](assets/lcd-palette.png) ![Custom palette encoding](assets/custom-palette.png)
 
 ## Installation
 This project is still pre-release, however since it's now in use a Maven SNAPSHOT (unstable) artifact is available.
