@@ -20,6 +20,7 @@ import java.math.BigInteger;
 
 /**
  * Printer request data packet for use on a serial stream to a real GB printer
+ * Packet is based on this specification: https://en.wikipedia.org/wiki/Game_Boy_Printer#Game_Boy_Printer_Protocol
  */
 public class PrintRequestPacket {
     private final byte[] syncWords = new byte[]{(byte) 0x88, (byte)0x33};
@@ -35,17 +36,15 @@ public class PrintRequestPacket {
     public PrintRequestPacket(Command command, byte... payload) {
         this.command = command;
         this.payload = payload;
-        dataLength = new byte[]{
-                (byte)(0x000000FF&payload.length),
-                (byte)((0x0000FF00&payload.length)>>8),
-        };
+        dataLength = toLowHigh2Byte(payload.length);
         checksumBytes = createChecksumBytes(dataLength);
     }
 
-    public byte[] toBytes() {
-        byte[] syncAndCommand = new byte[]{syncWords[0], syncWords[1], command.toByte(), compression};
-        byte[] ackAndStatus = new byte[]{ack,status};
-        return createPacketBytes(syncAndCommand, dataLength, payload, checksumBytes, ackAndStatus);
+    private byte[] toLowHigh2Byte(int byteData) {
+        return new byte[]{
+                (byte)(0x000000FF&byteData),
+                (byte)((0x0000FF00&byteData)>>8),
+        };
     }
 
     private byte[] createChecksumBytes(byte[] dataLength) {
@@ -57,12 +56,7 @@ public class PrintRequestPacket {
                 +Byte.toUnsignedInt(dataLength[0])
                 +Byte.toUnsignedInt(dataLength[1])
                 +payloadSum;
-        byte[] checksum = new byte[] {
-            (byte)(0x000000FF&checksumTotal),
-            (byte)((0x0000FF00&checksumTotal)>>8),
-        };
-        //System.out.println("Checksum:"+new BigInteger(1, checksum).toString(16));
-        return checksum;
+        return toLowHigh2Byte(checksumTotal);
     }
 
     private byte[] createPacketBytes(byte[] syncAndCommand, byte[] dataLength, byte[] payload, byte[] checksum, byte[] ackAndStatus) {
@@ -84,5 +78,11 @@ public class PrintRequestPacket {
 
     public String toHexString() {
         return new BigInteger(1, toBytes()).toString(16);
+    }
+
+    public byte[] toBytes() {
+        byte[] syncAndCommand = new byte[]{syncWords[0], syncWords[1], command.toByte(), compression};
+        byte[] ackAndStatus = new byte[]{ack,status};
+        return createPacketBytes(syncAndCommand, dataLength, payload, checksumBytes, ackAndStatus);
     }
 }

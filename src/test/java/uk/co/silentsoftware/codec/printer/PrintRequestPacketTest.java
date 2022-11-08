@@ -53,4 +53,11 @@ public class PrintRequestPacketTest {
         String hexString = printRequestPacket.toHexString();
         Assert.assertEquals("88330f0000000f000000", hexString);
     }
+
+    @Test
+    public void testInitializePayload() throws DecoderException, IOException {
+        PrintRequestPacket printRequestPacket = new PrintRequestPacket(Command.INITIALIZE);
+        String hexString = printRequestPacket.toHexString();
+        Assert.assertEquals("88330100000001000000", hexString);
+    }
 }
