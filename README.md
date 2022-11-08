@@ -5,8 +5,10 @@ A Java library capable of encoding, decoding, injecting and extracting Gameboy C
 
 ## Examples
 
+### Original Photo to Encode
 ![Original photo](assets/pier.png) 
 
+### Gameboy Encoded (then decoded for web use) Photo Using Various Gameboy Palettes
 ![Even distribution palette encoding](assets/even-dist-palette.png) ![GB Dump palette encoding](assets/gb-dump-palette.png) ![LCD palette encoding](assets/lcd-palette.png) ![Custom palette encoding](assets/custom-palette.png)
 
 ## Installation
