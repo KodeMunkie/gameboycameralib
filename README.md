@@ -1,10 +1,20 @@
 # Gameboy Camera Lib
-A library capable of encoding and decoding Gameboy Camera 2BPP images as PNGs or BufferedImages.
 
-## Usage
+## Overview
+A Java library capable of encoding, decoding, injecting and extracting Gameboy Camera 2BPP images as PNGs or BufferedImages into or from existing Gameboy Camera save files.
+
+## Examples
+
+### Original Photo to Encode
+![Original photo](assets/pier.png) 
+
+### Gameboy Encoded (then decoded for web use) Photo Using Various Gameboy Palettes
+![Even distribution palette encoding](assets/even-dist-palette.png) ![GB Dump palette encoding](assets/gb-dump-palette.png) ![LCD palette encoding](assets/lcd-palette.png) ![Custom palette encoding](assets/custom-palette.png)
+
+## Installation
 This project is still pre-release, however since it's now in use a Maven SNAPSHOT (unstable) artifact is available.
 
-**Sadly because of [this GitHub issue](https://github.community/t/download-from-github-package-registry-without-authentication/14407/59)
+**Sadly because of [this GitHub issue](https://github.com/orgs/community/discussions/26634)
 you will need to specify your GitHub personal access token in your .m2/settings.xml in order to use it.**
 
 Add the following to your Maven project pom.xml:
@@ -12,7 +22,7 @@ Add the following to your Maven project pom.xml:
 <dependency>
     <groupId>uk.co.silentsoftware</groupId>
     <artifactId>gameboy-camera-lib</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
 </dependency>
 
 <repositories>
@@ -27,6 +37,8 @@ Add the following to your Maven project pom.xml:
     </repository>
 </repositories>
 ```
+## Usage
+
 ### Choose a palette
 Gameboy images contain no RGB palette information, only 4 shades. The representation of these shades
 on a true colour display requires you to make a choice as to what RGB values they represent, usually greens 
@@ -38,6 +50,11 @@ use to decode/encode images or define your own indexed array pass it into the co
 Inject the IndexedPalette into the constructor for the decoder or encoder classes described below.
 
 ### To decode
+
+Either...
+
+#### Extract from an existing camera dump file
+
 If you have a Gameboy Camera save dump call any of the public "extract" or "extractAsPng" methods in:
 "uk.co.silentsoftware.codec.extractor.SaveImageExtractor" using the "Extractor" interface.
 
@@ -46,13 +63,15 @@ E.g.
 Extractor extractor = new SaveImageExtractor(new IndexedPalette(IndexedPalette.EVEN_DIST_PALETTE));
 List<BufferedImage> images = extractor.extract(new File("C:/Temp/MyGameboyImageSaveFile.sav"));
 ```
-Or
+Alternatively
 ```java
 Extractor extractor = new SaveImageExtractor(new IndexedPalette(IndexedPalette.EVEN_DIST_PALETTE));
-List<byte[]> images = extractor.extractAsPng(new File("C:/Temp/MyGameboyImageSaveFile.sav"));
+List<byte[]> pngImages = extractor.extractAsPng(new File("C:/Temp/MyGameboyImageSaveFile.sav"));
 ```
 
-Or if you have a single extracted 2bpp byte data as an array already call the public "decode" method in:
+#### Decode Gameboy compatible 2bpp byte data only
+
+If you have extracted a single image as a 2bpp byte data array already simply call the public "decode" method in:
 "uk.co.silentsoftware.codec.image.ImageCodec" using the "Codec" interface.
 
 E.g.
@@ -62,6 +81,36 @@ BufferedImage myBufferedImage = codec.decode(myRaw2BppImageDataArray);
 ```
 
 ### To encode
+
+Either...
+
+#### Inject into an existing camera dump file
+
+If you have a Gameboy Camera save dump call any of the public "inject" methods in: "uk.co.silentsoftware.codec.injector.SaveImageInjector" using the "Injector" interface
+and this will overwrite the images in your save. 
+
+Note the following caveats
+- The save dump must have the images already populated that you'd like to replace, i.e. it can't add images to the save, just replace existing images. This is due to an incomplete reverse engineered specification for the camera dump file format.
+- There is a maximum (hardware) limit of 30 images. If you attempt to inject more than this they will be silently dropped.
+
+E.g.
+```java
+List<File> filesToInject = new ArrayList<>();
+filesToInject.add("C:/Temp/NewImageToInject1.jpg"); // First photo
+filesToInject.add("C:/Temp/NewImageToInject2.jpg"); // Second photo (etc).
+Injector injector = new SaveImageInjector();
+byte[] myUpdatedImageFile = injector.inject(new File("C:/Temp/MyGameboyImageSaveFile.sav"), filesToInject);
+```
+Alternatively
+```java
+List<BufferedImage> imagesToInject = ...
+byte[] saveFileByteData = ...
+Injector injector = new SaveImageInjector();
+byte[] myUpdatedSaveFileByteData = injector.inject(saveFileByteData, imagesToInject);
+```
+
+#### Encode Gameboy compatible 2bpp byte data only
+
 With a BufferedImage call any of the public "encode" methods in
 "uk.co.silentsoftware.codec.image.ImageCodec" using the "Codec" interface.
 
@@ -71,19 +120,14 @@ Codec codec = new ImageCodec(new IndexedPalette(IndexedPalette.GAMEBOY_LCD_PALET
 byte[] myRaw2BppImageDataArray = codec.encode(myBufferedImageData);
 ```
 
-The source BufferedImage data, which is assumed to be using the Indexed palette RGB values, will be dithered and 
-converted to the specified dimensions compatible with Gameboy hardware. If you want to customise this then consider 
-using the "encodeNoPreprocessing" method, but you will need the image to have the RGB values defined
-and in use in IndexedPalette, with the width/height of the Gameboy image format 
-(160x144 for printer saves or 128x112 for camera dumps).
-Equivalent to SaveImageExtractor there is also a SaveImageInjector class which can overwrite images in an existing
-save file, however it currently lacks the ability to create a Gameboy save file from scratch so I'm not recommending
-you use that yet.
+The source BufferedImage data will be dithered and converted to the specified dimensions compatible with Gameboy hardware. 
+If you want to customise this then consider using the "encodeNoPreprocessing" method, but you will need your images to use IndexedPalette and width/height you 
+specified in the ImageCodec constructor (constants are available in SaveImageConstants.java of 160x144 for printer saves 
+or 128x112 for camera dumps).
 
-### Still to do
-Implement PrinterImageExtractor - ImageCodec class' decode methods already work for single printer images. 
-Implement PrinterImageInjector. 
-Improve SaveImageInjector to create Gameboy save files rather than replacing images in an existing save.
+### Still To Do and Work In Progress
 
-Also still to change - method comments and javadoc, tests and error handling (code has all been tested manually so YMMV). 
-Dither configuration options and command line interface code.
+- Gameboy Printer byte data image injection (suitable for use with real printer hardware). Currently in progress.
+- Gameboy Printer byte data image extraction (suitable for debugging raw stream data from a printer).
+- More tests and better error handling (code has all been tested manually with uncommitted local integration tests but YMMV).
+- Command line interface to support third party APIs/other languages.
