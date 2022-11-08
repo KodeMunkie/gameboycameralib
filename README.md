@@ -69,9 +69,9 @@ Extractor extractor = new SaveImageExtractor(new IndexedPalette(IndexedPalette.E
 List<byte[]> pngImages = extractor.extractAsPng(new File("C:/Temp/MyGameboyImageSaveFile.sav"));
 ```
 
-#### Encode Gameboy compatible 2bpp byte data only
+#### Decode Gameboy compatible 2bpp byte data only
 
-If you have a single extracted 2bpp byte data as an array already call the public "decode" method in:
+If you have extracted a single image as a 2bpp byte data array already simply call the public "decode" method in:
 "uk.co.silentsoftware.codec.image.ImageCodec" using the "Codec" interface.
 
 E.g.
