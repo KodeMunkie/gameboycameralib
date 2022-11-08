@@ -20,7 +20,7 @@ Add the following to your Maven project pom.xml:
 <dependency>
     <groupId>uk.co.silentsoftware</groupId>
     <artifactId>gameboy-camera-lib</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
 </dependency>
 
 <repositories>
