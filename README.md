@@ -3,9 +3,9 @@ A library capable of encoding, decoding, extracting and injecting Gameboy Camera
 
 ## Examples
 
-[Original photo]("assets/pier.png") 
+[Original photo](assets/pier.png) 
 
-[Even distribution palette encoding]("assets/even-dist-palette.png")[GB Dump palette encoding]("assets/gb-dump-palette.png")[LCD palette encoding]("assets/lcd-palette.png")[Custom palette encoding]("assets/custom-palette.png")
+[Even distribution palette encoding](assets/even-dist-palette.png) [GB Dump palette encoding](assets/gb-dump-palette.png) [LCD palette encoding](assets/lcd-palette.png) [Custom palette encoding](assets/custom-palette.png)
 
 ## Installation
 This project is still pre-release, however since it's now in use a Maven SNAPSHOT (unstable) artifact is available.
