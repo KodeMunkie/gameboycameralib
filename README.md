@@ -44,8 +44,8 @@ Gameboy images contain no RGB palette information, only 4 shades. The representa
 on a true colour display requires you to make a choice as to what RGB values they represent, usually greens 
 (screen like) or greys (printer like). 
 
-A few example palettes are already available in the "uk.co.silentsoftware.codec.IndexPalette" class.
-From the "uk.co.silentsoftware.codec.IndexPalette" class decide which palette constant you want to
+A few example palettes are already available in the "uk.co.silentsoftware.codec.image.IndexPalette" class.
+From the "uk.co.silentsoftware.codec.image.IndexPalette" class decide which palette constant you want to
 use to decode/encode images or define your own indexed array pass it into the constructor on this class.
 Inject the IndexedPalette into the constructor for the decoder or encoder classes described below.
 

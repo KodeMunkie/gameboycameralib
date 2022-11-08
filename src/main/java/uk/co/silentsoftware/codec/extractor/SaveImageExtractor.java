@@ -17,7 +17,7 @@
 package uk.co.silentsoftware.codec.extractor;
 
 import uk.co.silentsoftware.codec.Extractor;
-import uk.co.silentsoftware.codec.constants.IndexedPalette;
+import uk.co.silentsoftware.codec.image.IndexedPalette;
 import uk.co.silentsoftware.codec.image.ImageCodec;
 
 import javax.imageio.ImageIO;

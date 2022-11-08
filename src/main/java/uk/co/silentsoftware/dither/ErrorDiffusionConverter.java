@@ -16,7 +16,7 @@
  */
 package uk.co.silentsoftware.dither;
 
-import uk.co.silentsoftware.codec.constants.IndexedPalette;
+import uk.co.silentsoftware.codec.image.IndexedPalette;
 import uk.co.silentsoftware.dither.strategy.AtkinsonDither;
 import uk.co.silentsoftware.dither.strategy.ErrorDiffusionDither;
 import uk.co.silentsoftware.util.ImageUtils;

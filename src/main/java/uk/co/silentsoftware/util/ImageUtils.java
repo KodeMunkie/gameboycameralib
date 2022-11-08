@@ -16,6 +16,7 @@
  */
 package uk.co.silentsoftware.util;
 
+import uk.co.silentsoftware.util.colourdistance.ColourDistanceStrategy;
 import uk.co.silentsoftware.util.colourdistance.LuminanceColourDistance;
 
 import java.awt.*;

@@ -17,7 +17,7 @@
 package uk.co.silentsoftware.codec.tile;
 
 import uk.co.silentsoftware.codec.Codec;
-import uk.co.silentsoftware.codec.constants.IndexedPalette;
+import uk.co.silentsoftware.codec.image.IndexedPalette;
 
 import java.awt.image.BufferedImage;
 

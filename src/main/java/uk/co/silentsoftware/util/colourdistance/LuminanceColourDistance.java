@@ -16,8 +16,6 @@
  */
 package uk.co.silentsoftware.util.colourdistance;
 
-import uk.co.silentsoftware.util.ColourDistanceStrategy;
-
 /**
  * Luminance colour distance adapted from http://appleoldies.ca/a2b/DHGRColors2017.htm
  */

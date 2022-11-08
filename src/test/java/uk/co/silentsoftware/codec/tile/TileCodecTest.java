@@ -20,7 +20,7 @@ import org.apache.commons.codec.binary.Hex;
 import org.junit.Assert;
 import org.junit.Test;
 import uk.co.silentsoftware.codec.Codec;
-import uk.co.silentsoftware.codec.constants.IndexedPalette;
+import uk.co.silentsoftware.codec.image.IndexedPalette;
 
 import java.awt.image.BufferedImage;
 
