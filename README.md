@@ -104,7 +104,7 @@ Alternatively
 List<BufferedImage> imagesToInject = ...
 byte[] saveFileByteData = ...
 Injector injector = new SaveImageInjector();
-byte[] myUpdatedSaveFileByteData = injector.inject(saveFileByteData, imagesToInject)
+byte[] myUpdatedSaveFileByteData = injector.inject(saveFileByteData, imagesToInject);
 ```
 
 #### Encode Gameboy compatible 2bpp byte data only
