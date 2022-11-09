@@ -42,8 +42,8 @@ public class PrintRequestPacket {
 
     private byte[] toLowHigh2Byte(int byteData) {
         return new byte[]{
-                (byte)(0x000000FF&byteData),
-                (byte)((0x0000FF00&byteData)>>8),
+                (byte)(byteData & 0xFF),
+                (byte)((byteData>>8) & 0xFF)
         };
     }
 
