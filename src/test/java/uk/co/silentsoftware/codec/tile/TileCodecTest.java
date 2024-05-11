@@ -1,8 +1,8 @@
 package uk.co.silentsoftware.codec.tile;
 
 import org.apache.commons.codec.binary.Hex;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import uk.co.silentsoftware.codec.Codec;
 import uk.co.silentsoftware.codec.constants.IndexedPalette;
 
@@ -17,13 +17,13 @@ public class TileCodecTest {
     public void testSimpleTile1() throws Exception {
         Codec codec = new TileCodec(new IndexedPalette());
         BufferedImage image = codec.decode(Hex.decodeHex(TEST_TILE_DATA_1));
-        Assert.assertEquals(TEST_TILE_DATA_1, Hex.encodeHexString(codec.encode(image),false));
+        Assertions.assertEquals(TEST_TILE_DATA_1, Hex.encodeHexString(codec.encode(image),false));
     }
 
     @Test
     public void testSimpleTile2() throws Exception {
         Codec codec = new TileCodec(new IndexedPalette());
         BufferedImage image = codec.decode(Hex.decodeHex(TEST_TILE_DATA_2));
-        Assert.assertEquals(TEST_TILE_DATA_2, Hex.encodeHexString(codec.encode(image),false));
+        Assertions.assertEquals(TEST_TILE_DATA_2, Hex.encodeHexString(codec.encode(image),false));
     }
 }
