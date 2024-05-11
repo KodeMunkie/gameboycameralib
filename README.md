@@ -12,31 +12,17 @@ A Java library capable of encoding, decoding, injecting and extracting Gameboy C
 ![Even distribution palette encoding](assets/even-dist-palette.png) ![GB Dump palette encoding](assets/gb-dump-palette.png) ![LCD palette encoding](assets/lcd-palette.png) ![Custom palette encoding](assets/custom-palette.png)
 
 ## Installation
-This project is still pre-release, however since it's now in use a Maven SNAPSHOT (unstable) artifact is available.
-
-**Sadly because of [this GitHub issue](https://github.com/orgs/community/discussions/26634)
-you will need to specify your GitHub personal access token in your .m2/settings.xml in order to use it.**
+Note rhis project still has a few unimplemented features, however since it's been a few years in dev, and it's already in use by third party software, a Maven artifact is now available.
 
 Add the following to your Maven project pom.xml:
 ```xml
 <dependency>
     <groupId>uk.co.silentsoftware</groupId>
     <artifactId>gameboy-camera-lib</artifactId>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>1.2.0</version>
 </dependency>
-
-<repositories>
-    ...
-    <repository>
-        <id>gameboy-camera-lib</id>
-        <url>https://raw.github.com/kodemunkie/gameboycameralib/mvn-repo/</url>
-        <snapshots>
-            <enabled>true</enabled>
-            <updatePolicy>always</updatePolicy>
-        </snapshots>
-    </repository>
-</repositories>
 ```
+
 ## Usage
 
 ### Choose a palette
